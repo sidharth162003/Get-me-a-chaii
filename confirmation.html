@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        #map {
+            height: 400px; /* Set the height of the map */
+            width: 100%; /* Set the width of the map */
+            margin: 20px 0;
+        }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+</head>
+<body>
+    <header>
+        <h1>Your Order is Confirmed!</h1>
+    </header>
+
+    <section>
+        <h2>Your Chai is on the Way!</h2>
+        <p>Hold on tight, your chai is being prepared and will be delivered shortly.</p>
+        
+        <h3>Your Order Details:</h3>
+        <p><strong>Name:</strong> <span id="order-name"></span></p>
+        <p><strong>Chai Type:</strong> <span id="order-chai"></span></p>
+        <p><strong>Quantity:</strong> <span id="order-quantity"></span></p>
+        <p><strong>Sugar (spoon count):</strong> <span id="order-sugar"></span></p>
+        
+        <h3>Your Current Location:</h3>
+        <p id="order-location"></p>
+        <div id="map"></div>
+    </section>
+
+    <script>
+        function initMap() {
+            // Set a random location (e.g., New York City)
+            const randomLocation = { lat: 40.712776, lng: -74.005974 }; // New York City coordinates
+
+            // Create a map centered at the random location
+            const map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 12,
+                center: randomLocation,
+            });
+
+            // Place a marker at the random location
+            const marker = new google.maps.Marker({
+                position: randomLocation,
+                map: map,
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Retrieve order details from localStorage
+            document.getElementById('order-name').innerText = localStorage.getItem('orderName');
+            document.getElementById('order-chai').innerText = localStorage.getItem('orderChai');
+            document.getElementById('order-quantity').innerText = localStorage.getItem('orderQuantity');
+            document.getElementById('order-sugar').innerText = localStorage.getItem('orderSugar');
+            document.getElementById('order-location').innerText = localStorage.getItem('orderLocation');
+        });
+    </script>
+</body>
+</html>

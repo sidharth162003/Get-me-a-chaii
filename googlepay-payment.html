@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Pay Payment</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Google Pay Payment</h1>
+    </header>
+
+    <section id="googlepay-details">
+        <h2>Scan the QR code or enter Google Pay ID</h2>
+        <div id="qrcode-googlepay"></div>
+        <p>Google Pay ID: example@gmail.com</p>
+        <button id="confirm-payment">Confirm Payment</button>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            const googlePayLink = "upi://pay?pa=example@gmail.com&pn=Your%20Name&mc=1234&tid=1234567890&am=10&cu=INR&url=https://yourwebsite.com";
+            $('#qrcode-googlepay').qrcode(googlePayLink);
+
+            $('#confirm-payment').click(function() {
+                localStorage.setItem('userName', 'John Doe'); // Example user name
+                window.location.href = 'confirmation.html'; // Redirect to confirmation page
+            });
+        });
+    </script>
+</body>
+</html>
